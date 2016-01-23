@@ -4,7 +4,7 @@ class StudentValidator {
   }
 
   isValid() {
-    return this.errors().length === 0
+    return Object.keys(this.errors()).length === 0
   }
 
   errors() {
@@ -13,7 +13,7 @@ class StudentValidator {
       (errors) => {
         const key = Object.keys(errors)[0];
         if(errors[key].length > 0 && key !== "id")
-          studentErrors[key] = errors;
+          studentErrors[key] = errors[key];
         return true;
       }
     );
