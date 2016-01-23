@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 /* other approach when you need only render function, and no state
 export default (props) =>
@@ -16,9 +17,9 @@ class Header extends React.Component {
   render() {
     return (
       <header>
-        <a href="/">
+        <Link to="/">
           <img src="../img/lunarts-logo-collapsed.png" className="logo"/>
-        </a>
+        </Link>
       </header>
     )
   }
