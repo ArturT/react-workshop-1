@@ -3,6 +3,7 @@ import Menu from '../components/shared/Menu';
 import MenuButtonNames from '../lib/MenuButtonNames';
 import BasicInfo from '../components/enroll/BasicInfo';
 import Preferences from '../components/enroll/Preferences';
+import API from '../lib/API';
 
 class Enroll extends React.Component {
   handleSubmit(e) {
@@ -12,6 +13,8 @@ class Enroll extends React.Component {
     //console.log(this.refs.preferences.value());
     let student = Object.assign({}, this.refs.basic.value(), this.refs.preferences.value());
     console.log(student);
+    const api = new API();
+    const result = api.addStudent(student.name, student.surname, student.house, student.pet);
   }
 
   render() {
