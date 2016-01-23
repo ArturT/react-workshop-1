@@ -4,6 +4,7 @@ import MenuButtonNames from '../lib/MenuButtonNames';
 import BasicInfo from '../components/enroll/BasicInfo';
 import Preferences from '../components/enroll/Preferences';
 import API from '../lib/API';
+import history from '../history';
 
 class Enroll extends React.Component {
   handleSubmit(e) {
@@ -15,6 +16,7 @@ class Enroll extends React.Component {
     console.log(student);
     const api = new API();
     const result = api.addStudent(student.name, student.surname, student.house, student.pet);
+    history.pushState(null, '/participants')
   }
 
   render() {
