@@ -21,4 +21,10 @@ class Button extends React.Component {
   }
 };
 
+Button.propTypes = {
+  isActive: React.PropTypes.bool,
+  url: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string.isRequired
+};
+
 export default Button;
