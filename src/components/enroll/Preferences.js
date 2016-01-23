@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from '../shared/Error';
 
 class Preferences extends React.Component {
   constructor(props) {
@@ -26,6 +27,19 @@ class Preferences extends React.Component {
     }
   }
 
+  renderErrorForField(field_name) {
+    console.log('props', this.props);
+    let errs = this.props.errors[field_name];
+    console.log('errs', errs);
+    if (errs) {
+      return errs.map((message) => {
+        return (
+          <Error message={message} />
+        )
+      })
+    }
+  }
+
   render() {
     return (
       <fieldset>
@@ -41,6 +55,7 @@ class Preferences extends React.Component {
               <option value="hufflepuff">Hufflepuff</option>
             </select>
           </div>
+          {this.renderErrorForField("house")}
           <label htmlFor="pet">Pet Companion</label>
           <div className="select-wrapper">
             <select name="pet" defaultValue="" ref="pet">
@@ -52,6 +67,7 @@ class Preferences extends React.Component {
               <option value="snake">Snake</option>
             </select>
           </div>
+          {this.renderErrorForField("pet")}
         </div>
       </fieldset>
     )

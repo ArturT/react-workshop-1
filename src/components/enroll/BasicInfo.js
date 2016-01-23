@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from '../shared/Error';
 
 class BasicInfo extends React.Component {
   constructor(props) {
@@ -26,6 +27,19 @@ class BasicInfo extends React.Component {
     }
   }
 
+  renderErrorForField(field_name) {
+    console.log('props', this.props);
+    let errs = this.props.errors[field_name];
+    console.log('errs', errs);
+    if (errs) {
+      return errs.map((message) => {
+        return (
+          <Error message={message} />
+        )
+      })
+    }
+  }
+
   render() {
     return (
       <fieldset>
@@ -33,8 +47,10 @@ class BasicInfo extends React.Component {
         <div className={this.formVisibilityCss()}>
           <label htmlFor="name">First Name</label>
           <input type="text" name="name" placeholder="Arien" ref="name" />
+          {this.renderErrorForField("name")}
           <label htmlFor="surname">Surname</label>
           <input type="text" name="surname" placeholder="Doriath" ref="surname" />
+          {this.renderErrorForField("surname")}
         </div>
       </fieldset>
     )

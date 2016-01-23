@@ -5,8 +5,14 @@ import BasicInfo from '../components/enroll/BasicInfo';
 import Preferences from '../components/enroll/Preferences';
 import API from '../lib/API';
 import history from '../history';
+import Error from '../components/shared/Error';
 
 class Enroll extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { errors: {} }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     //console.log(this.refs);
@@ -16,7 +22,12 @@ class Enroll extends React.Component {
     console.log(student);
     const api = new API();
     const result = api.addStudent(student.name, student.surname, student.house, student.pet);
-    history.pushState(null, '/participants')
+    if (result.errors) {
+      console.log(result.errors)
+      this.setState({ errors: result.errors })
+    } else {
+      history.pushState(null, '/participants')
+    }
   }
 
   render() {
@@ -24,8 +35,8 @@ class Enroll extends React.Component {
       <div>
         <Menu activeButton={MenuButtonNames.ENROLL} />
         <form>
-          <BasicInfo ref="basic" />
-          <Preferences ref="preferences" />
+          <BasicInfo ref="basic" errors={this.state.errors} />
+          <Preferences ref="preferences" errors={this.state.errors} />
           <div className="action-holder">
             <input onClick={this.handleSubmit.bind(this)} type="submit" value="Enroll" />
           </div>
