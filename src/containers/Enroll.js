@@ -5,6 +5,15 @@ import BasicInfo from '../components/enroll/BasicInfo';
 import Preferences from '../components/enroll/Preferences';
 
 class Enroll extends React.Component {
+  handleSubmit(e) {
+    e.preventDefault();
+    //console.log(this.refs);
+    //console.log(this.refs.basic.value());
+    //console.log(this.refs.preferences.value());
+    let student = Object.assign({}, this.refs.basic.value(), this.refs.preferences.value());
+    console.log(student);
+  }
+
   render() {
     return (
       <div>
@@ -13,7 +22,7 @@ class Enroll extends React.Component {
           <BasicInfo ref="basic" />
           <Preferences ref="preferences" />
           <div className="action-holder">
-            <input type="submit" value="Enroll" />
+            <input onClick={this.handleSubmit.bind(this)} type="submit" value="Enroll" />
           </div>
         </form>
       </div>
