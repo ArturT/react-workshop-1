@@ -5,7 +5,7 @@ class StudentsList extends React.Component {
   render() {
     return (
       <div>
-        <Menu/>
+        <Menu activeButton="students_list"/>
         <h1>List of enrolled students </h1>
         <ul className="students">
           <li className="student-item">
