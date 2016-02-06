@@ -1,25 +1,11 @@
 import appDispatcher from '../appDispatcher';
 import actionTypes from '../constants/actionTypes';
-import EventEmitter from 'events';
+import AbstractStore from './AbstractStore';
 
-const DEFAULT_EVENT = 'event';
-
-class EnrollStore extends EventEmitter {
+class EnrollStore extends AbstractStore {
   constructor() {
     super();
     this.isBasicInfoOpen = true;
-  }
-
-  register(callback) {
-    this.on(DEFAULT_EVENT, callback)
-  }
-
-  unregister(callback) {
-    this.removeListener(DEFAULT_EVENT, callback)
-  }
-
-  emitEvent() {
-    this.emit(DEFAULT_EVENT)
   }
 
   toggleBasicInfo() {
