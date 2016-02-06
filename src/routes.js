@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, Link } from 'react-router'
+import { Route, IndexRoute, Link } from 'react-router'
 import Layout from './containers/Layout';
 import Main from "./containers/Main";
 import Participants from "./containers/Participants";

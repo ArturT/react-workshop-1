@@ -30,10 +30,25 @@ app.use(WebpackHotMiddleware(compiler, {
   path: '/__webpack_hmr'
 }));
 
-//app.get('*', (req,res) => {
-  //res.sendFile(path.join(__dirname + '/views/index.html'));
-//});
-app.use('*', (req, res) => {
+let indexHtml = (app) => {
+  return `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Lunars School of Witchcraft and Wizardry</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://fonts.googleapis.com/css?family=Dosis:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+    <link href="/bundle.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="app">${app}</div>
+    <script src="/bundle.js" type="text/javascript"></script>
+  </body>
+</html>`;
+}
+
+app.use((req, res) => {
   // Note that req.url here should be the full URL path from
   // the original request, including the query string.
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
@@ -42,7 +57,7 @@ app.use('*', (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      res.status(200).send(renderToString(<RoutingContext {...renderProps} />))
+      res.status(200).send(indexHtml(renderToString(<RoutingContext {...renderProps} />)))
     } else {
       res.status(404).send('Not found')
     }
