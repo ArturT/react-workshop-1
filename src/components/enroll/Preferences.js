@@ -1,5 +1,7 @@
 import React from 'react';
 import Error from '../shared/Error';
+import preferencesStore from '../../stores/preferencesStore';
+import preferencesActionCreator from '../../action_creators/preferencesActionCreator';
 
 class Preferences extends React.Component {
   constructor(props) {
@@ -7,8 +9,20 @@ class Preferences extends React.Component {
     this.state = {
       open: false
     }
+    this.updateStateCallback = this.updateState.bind(this);
   }
 
+  updateState() {
+    this.setState({open: preferencesStore.getIsBasicInfoOpen() })
+  }
+
+  componentWillMount() {
+    preferencesStore.register(this.updateStateCallback);
+  }
+
+  componentWillUnmount() {
+    preferencesStore.unregister(this.updateStateCallback);
+  }
   value() {
     return {
       house: this.refs.house.value,
@@ -17,7 +31,7 @@ class Preferences extends React.Component {
   }
 
   toggleForm() {
-    this.setState({open: !this.state.open})
+    preferencesActionCreator.dispatch();
   }
 
   formVisibilityCss() {
