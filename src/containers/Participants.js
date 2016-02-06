@@ -3,6 +3,8 @@ import Menu from '../components/shared/Menu';
 import MenuButtonNames from '../lib/MenuButtonNames';
 import Student from '../components/participants/Student';
 import API from '../lib/API';
+import participantsStore from '../stores/participantsStore';
+import participantsActionCreator from '../action_creators/participantsActionCreator';
 
 class Participants extends React.Component {
   constructor(props) {
@@ -10,12 +12,20 @@ class Participants extends React.Component {
     this.state = {
       students: []
     }
+    this.updateStateCallback = this.updateState.bind(this);
+  }
+
+  updateState() {
+    this.setState({students: participantsStore.getStudents() })
   }
 
   componentWillMount() {
-    this.setState({
-      students: new API().getStudents()
-    });
+    participantsStore.register(this.updateStateCallback);
+    participantsActionCreator.requestStudents();
+  }
+
+  componentWillUnmount() {
+    participantsStore.unregister(this.updateStateCallback);
   }
 
   renderStudents() {
