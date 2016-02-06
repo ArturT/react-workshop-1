@@ -1,5 +1,5 @@
-const consts = {
+const actionTypes = {
   TOGGLE_BASIC_INFO: 'TOGGLE_BASIC_INFO'
 }
 
-export default consts;
+export default actionTypes;

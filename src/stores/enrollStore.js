@@ -1,5 +1,5 @@
 import appDispatcher from '../appDispatcher';
-import consts from '../constants/actionTypes';
+import actionTypes from '../constants/actionTypes';
 import EventEmitter from 'events';
 
 const DEFAULT_EVENT = 'event';
@@ -35,7 +35,7 @@ class EnrollStore extends EventEmitter {
 let enrollStore = new EnrollStore();
 
 appDispatcher.register(function(payload) {
-  if (payload.actionType == consts.TOGGLE_BASIC_INFO) {
+  if (payload.actionType == actionTypes.TOGGLE_BASIC_INFO) {
     enrollStore.toggleBasicInfo();
   }
 });

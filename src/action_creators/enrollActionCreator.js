@@ -1,10 +1,10 @@
 import appDispatcher from '../appDispatcher';
-import consts from '../constants/actionTypes';
+import actionTypes from '../constants/actionTypes';
 
 var enrollActionCreator = {
   dispatch: function() {
     appDispatcher.dispatch({
-      actionType: consts.TOGGLE_BASIC_INFO
+      actionType: actionTypes.TOGGLE_BASIC_INFO
     });
   }
 };
