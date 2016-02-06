@@ -1,5 +1,7 @@
 import React from 'react';
 import Error from '../shared/Error';
+import appDispatcher from '../../appDispatcher';
+import enrollStore from '../../stores/enrollStore';
 
 class BasicInfo extends React.Component {
   constructor(props) {
@@ -7,6 +9,19 @@ class BasicInfo extends React.Component {
     this.state = {
       open: true
     }
+    this.updateStateCallback = this.updateState.bind(this);
+  }
+
+  updateState() {
+    this.setState({open: enrollStore.getIsBasicInfoOpen() })
+  }
+
+  componentWillMount() {
+    enrollStore.register(this.updateStateCallback);
+  }
+
+  componentWillUnmount() {
+    enrollStore.unregister(this.updateStateCallback);
   }
 
   value() {
@@ -17,7 +32,9 @@ class BasicInfo extends React.Component {
   }
 
   toggleForm() {
-    this.setState({open: !this.state.open})
+    appDispatcher.dispatch({
+      actionType: 'TOGGLE_BASIC_INFO'
+    })
   }
 
   formVisibilityCss() {
