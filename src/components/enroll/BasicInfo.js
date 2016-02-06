@@ -1,7 +1,7 @@
 import React from 'react';
 import Error from '../shared/Error';
-import appDispatcher from '../../appDispatcher';
 import enrollStore from '../../stores/enrollStore';
+import enrollActionCreator from '../../action_creators/enrollActionCreator';
 
 class BasicInfo extends React.Component {
   constructor(props) {
@@ -32,9 +32,7 @@ class BasicInfo extends React.Component {
   }
 
   toggleForm() {
-    appDispatcher.dispatch({
-      actionType: 'TOGGLE_BASIC_INFO'
-    })
+    enrollActionCreator.dispatch();
   }
 
   formVisibilityCss() {
