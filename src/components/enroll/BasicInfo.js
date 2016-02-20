@@ -1,29 +1,9 @@
 import React from 'react';
 import Error from '../shared/Error';
 import EnrollActionCreator from '../../action_creators/EnrollActionCreator';
-import EnrollStore from '../../stores/EnrollStore';
+import { connect } from 'react-redux';
 
 class BasicInfo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: true
-    }
-    this._onChange = this.onChange.bind(this);
-  }
-
-  componentWillMount() {
-    EnrollStore.addChangeListener(this._onChange);
-  }
-
-  componentWillUnmount() {
-    EnrollStore.removeChangeListener(this._onChange);
-  }
-
-  onChange() {
-    this.setState({ open: EnrollStore.isBasicInfoOpen() });
-  }
-
   value() {
     return {
       name: this.refs.name.value,
@@ -32,11 +12,11 @@ class BasicInfo extends React.Component {
   }
 
   toggleForm() {
-    EnrollActionCreator.toggleBasicInfo();
+    this.props.dispatch(EnrollActionCreator.toggleBasicInfo());
   }
 
   formVisibilityCss() {
-    const { open } = this.state;
+    const { open } = this.props;
     const common = "fields";
     const visible = "active";
     return open ? `${common} ${visible}` : common;
@@ -65,4 +45,10 @@ class BasicInfo extends React.Component {
   }
 }
 
-export default BasicInfo;
+function mapStateToProps(state) {
+  return {
+    open: state.basicInfoOpen
+  }
+}
+
+export default connect(mapStateToProps)(BasicInfo)
