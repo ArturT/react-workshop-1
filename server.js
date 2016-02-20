@@ -11,6 +11,8 @@ import { match, RoutingContext } from 'react-router';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Routes from './src/routes';
+import store from './src/store'
+import { Provider } from 'react-redux'
 
 const port = 1337;
 const ip = '127.0.0.1';
@@ -32,7 +34,9 @@ app.use(WebpackHotMiddleware(compiler, {
 
 const indexHtml = (renderProps) => {
   const app = ReactDOMServer.renderToString(
-    <RoutingContext {...renderProps} />);
+    <Provider store={store}>
+      <RoutingContext {...renderProps} />
+    </Provider>);
   return `
   <!DOCTYPE html>
   <html>
