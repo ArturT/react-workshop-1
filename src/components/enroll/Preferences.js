@@ -1,7 +1,6 @@
 import React from 'react';
 import Error from '../shared/Error';
 import EnrollActionCreator from '../../action_creators/EnrollActionCreator';
-import EnrollStore from '../../stores/EnrollStore';
 import { connect } from 'react-redux';
 
 class Preferences extends React.Component {
