@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import EnrollReducer from './reducers/EnrollReducer';
 import ParticipantsReducer from './reducers/ParticipantsReducer';
 
@@ -7,6 +8,6 @@ const reducers = combineReducers({
   participants: ParticipantsReducer
 })
 
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(thunk));
 
 export default store;

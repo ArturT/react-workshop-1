@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 class Participants extends React.Component {
   componentWillMount() {
-    let action = ParticipantsActionCreator.requestStudents();
+    let action = ParticipantsActionCreator.fetchStudents();
     this.props.dispatch(action);
   }
 
