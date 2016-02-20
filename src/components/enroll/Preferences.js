@@ -64,7 +64,7 @@ class Preferences extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    open: state.preferencesOpen
+    open: state.enroll.preferencesOpen
   }
 }
 

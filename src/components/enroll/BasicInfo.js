@@ -47,7 +47,7 @@ class BasicInfo extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    open: state.basicInfoOpen
+    open: state.enroll.basicInfoOpen
   }
 }
 
