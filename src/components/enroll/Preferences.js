@@ -2,28 +2,9 @@ import React from 'react';
 import Error from '../shared/Error';
 import EnrollActionCreator from '../../action_creators/EnrollActionCreator';
 import EnrollStore from '../../stores/EnrollStore';
+import { connect } from 'react-redux';
 
 class Preferences extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    }
-    this._onChange = this.onChange.bind(this);
-  }
-
-  componentWillMount() {
-    EnrollStore.addChangeListener(this._onChange);
-  }
-
-  componentWillUnmount() {
-    EnrollStore.removeChangeListener(this._onChange);
-  }
-
-  onChange() {
-    this.setState({ open: EnrollStore.isPreferencesOpen() });
-  }
-
   value() {
     return {
       house: this.refs.house.value,
@@ -32,11 +13,11 @@ class Preferences extends React.Component {
   }
 
   toggleForm() {
-    EnrollActionCreator.togglePreferences();
+    this.props.dispatch(EnrollActionCreator.togglePreferences());
   }
 
   formVisibilityCss() {
-    const { open } = this.state;
+    const { open } = this.props;
     const common = "fields";
     const visible = "active";
     return open ? `${common} ${visible}` : common;
@@ -82,4 +63,10 @@ class Preferences extends React.Component {
   }
 }
 
-export default Preferences;
+function mapStateToProps(state) {
+  return {
+    open: state.preferencesOpen
+  }
+}
+
+export default connect(mapStateToProps)(Preferences)

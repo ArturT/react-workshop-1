@@ -1,7 +1,8 @@
 import ActionTypes from '../constants/ActionTypes';
 
 const initialState = {
-  basicInfoOpen: true
+  basicInfoOpen: true,
+  preferencesOpen: false
 }
 
 function enrollReducer(state = initialState, action) {
@@ -9,6 +10,10 @@ function enrollReducer(state = initialState, action) {
     case ActionTypes.TOGGLE_BASIC_INFO:
       return Object.assign({}, state, {
         basicInfoOpen: !state.basicInfoOpen
+      })
+    case ActionTypes.TOGGLE_PREFERENCES:
+      return Object.assign({}, state, {
+        preferencesOpen: !state.preferencesOpen
       })
     default:
       return state
